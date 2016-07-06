@@ -10,6 +10,8 @@ export default class extends React.Component {
 		};
 
 		this.toggleTimer = this.toggleTimer.bind(this);
+		this.tick = this.tick.bind(this);
+		this.timerDone = this.timerDone.bind(this);
 	}
 
 	tick() {
@@ -34,15 +36,15 @@ export default class extends React.Component {
 	}
 
 	render() {
-		const buttonClass = this.state.isRunning ? 'btn btn-success' : 'btn btn-danger';
-		const buttonText =  this.state.isRunning ? 'Start' : 'Stop';
+		const buttonClass = this.state.isRunning ? 'btn btn-danger' : 'btn btn-success';
+		const buttonText =  this.state.isRunning ? 'Stop' : 'Start';
 		return (
 			<div className="container">
 				<div className="jumbotron text-center">
 					<h1>{this.state.secondsRemaining}</h1>
 				</div>
 				<div>
-					<button id="timerButton" type="button" className={buttonClass} onclick={this.toggleTimer}>{buttonText} Pomodoro!</button>
+					<button id="time" type="button" className={buttonClass} onClick={this.toggleTimer}>{buttonText} Pomodoro!</button>
 				</div>
 			</div>
 		)
