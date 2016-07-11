@@ -39,7 +39,8 @@ export default class extends React.Component {
 	}
 
 	resetTimer() {
-		this.setState({isRunning: false, secondsRemaining: 5});
+		this.timerDone();
+		this.setState({isRunning: false, secondsRemaining: 1500});
 	}
 
 	render() {

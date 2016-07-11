@@ -30,7 +30,10 @@ module.exports = {
 			{
 				test: /\.jsx?$/,
 				exclude: /(node_modules|bower_components)/,
-				loaders: ['react-hot', 'babel?presets[]=es2015,presets[]=react']
+				loader: 'babel-loader',
+				query: {
+					presets: ['es2015', 'react']
+				}
 			},
 			{
 				test: /\.less$/,
