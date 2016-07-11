@@ -59,7 +59,6 @@ export default class extends React.Component {
 						<div className="col-sm-3">
 							<button type="button" className="btn btn-info btn-block" onClick={this.resetTimer}>Rest</button>
 						</div>
-
 				</div>
 			</div>
 		)

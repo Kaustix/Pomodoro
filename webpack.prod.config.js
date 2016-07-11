@@ -1,11 +1,9 @@
-const webpack = require('webpack');
 const path = require('path');
+const webpack = require('webpack');
 
 module.exports = {
-	context: __dirname,
-	devtool: 'eval',
+	devtool: 'source-map',
 	entry: [
-		'webpack-hot-middleware/client',
 		'./js/App.jsx'
 	],
 	output: {
@@ -13,12 +11,19 @@ module.exports = {
 		filename: 'bundle.js',
 		publicPath: '/public/'
 	},
-	resolve: {
-		extensions: ['', '.js', '.jsx']
-	},
 	plugins: [
-		new webpack.HotModuleReplacementPlugin()
-		//new webpack.NoErrorsPlugin()
+		new webpack.optimize.DedupePlugin(),
+		new webpack.optimize.UglifyJsPlugin({
+			minimize: true,
+			compress: {
+				warnings: false
+			}
+		}),
+		new webpack.DefinePlugin({
+			'process.env': {
+				'NODE_ENV': JSON.stringify('production')
+			}
+		})
 	],
 	module: {
 		loaders: [
@@ -49,4 +54,4 @@ module.exports = {
 			}
 		]
 	}
-};
+}
