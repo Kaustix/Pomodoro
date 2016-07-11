@@ -43,6 +43,10 @@ module.exports = {
 				loader: "style!css!less"
 			},
 			{
+				test: /\.(png|gpd|ico|gif)?$/,
+				loader: 'file-loader?name=img/[name].[ext]'
+			},
+			{
 				test: /\.eot(\?v=\d+\.\d+\.\d+)?$/,
 				loader: "file"
 			},
