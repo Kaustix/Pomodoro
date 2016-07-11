@@ -1,7 +1,7 @@
 {
   "name": "pomodoro",
   "description": "A pomodoro timer",
-  "main": "index.js",
+  "main": "server.js",
   "authors": [
     "Kiernan Lamarche"
   ],
@@ -14,5 +14,8 @@
     "bower_components",
     "test",
     "tests"
-  ]
+  ],
+  "dependencies": {
+    "bootstrap": "^3.3.6"
+  }
 }
