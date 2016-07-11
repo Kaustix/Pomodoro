@@ -19,13 +19,8 @@ export default class extends React.Component {
 	tick() {
 		this.setState({secondsRemaining: this.state.secondsRemaining - 1});
 		if (this.state.secondsRemaining === 0) {
-			this.timerDone();
 			this.resetTimer();
 		}
-	}
-
-	timerDone() {
-		clearInterval(this.timer);
 	}
 
 	toggleTimer() {
@@ -36,6 +31,10 @@ export default class extends React.Component {
 		}
 
 		this.setState({isRunning: !this.state.isRunning});
+	}
+
+	timerDone() {
+		clearInterval(this.timer);
 	}
 
 	resetTimer() {
