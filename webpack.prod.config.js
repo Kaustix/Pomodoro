@@ -3,6 +3,9 @@ const webpack = require('webpack');
 
 module.exports = {
 	devtool: 'source-map',
+	resolve: {
+		extensions: ['', '.js', '.jsx']
+	},
 	entry: [
 		'./js/App.jsx'
 	],

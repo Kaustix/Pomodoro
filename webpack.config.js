@@ -17,8 +17,8 @@ module.exports = {
 		extensions: ['', '.js', '.jsx']
 	},
 	plugins: [
-		new webpack.HotModuleReplacementPlugin()
-		//new webpack.NoErrorsPlugin()
+		new webpack.HotModuleReplacementPlugin(),
+		new webpack.NoErrorsPlugin()
 	],
 	module: {
 		loaders: [
