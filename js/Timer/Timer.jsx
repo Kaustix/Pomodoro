@@ -1,5 +1,7 @@
 import React from 'react';
-import * as dateTimeExtension from './Extensions/DateTimeExtension'
+import * as dateTimeExtension from '../Extensions/DateTimeExtension'
+
+import {TimerButton} from './TimerButton';
 
 export default class extends React.Component {
 
@@ -43,7 +45,7 @@ export default class extends React.Component {
 	}
 
 	render() {
-		const buttonClass = this.state.isRunning ? 'btn btn-danger' : 'btn btn-success';
+		const buttonClass = this.state.isRunning ? 'danger' : 'success';
 		const buttonText = this.state.isRunning ? 'Stop' : 'Start';
 		return (
 			<div className="container">
@@ -51,14 +53,8 @@ export default class extends React.Component {
 					<h1>{dateTimeExtension.secondsToString(this.state.secondsRemaining)}</h1>
 				</div>
 				<div className="row">
-						<div className="col-sm-3 col-sm-offset-3">
-							<button type="button" className={`${buttonClass} btn-block`} onClick={this.toggleTimer}>
-								{buttonText} Pomodoro!
-							</button>
-						</div>
-						<div className="col-sm-3">
-							<button type="button" className="btn btn-info btn-block" onClick={this.resetTimer}>Rest</button>
-						</div>
+					<TimerButton class={buttonClass} text={`${buttonText}`} clickEvent={this.toggleTimer} offset={4}/>
+					<TimerButton class="info" text="Reset" clickEvent={this.resetTimer}/>
 				</div>
 			</div>
 		)
