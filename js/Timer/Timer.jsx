@@ -1,7 +1,7 @@
 import React from 'react';
-import * as dateTimeExtension from '../Extensions/DateTimeExtension'
 
-import {TimerButton} from './TimerButton';
+import TimerButton from './TimerButton';
+import TimerText from './TimerText';
 
 export default class extends React.Component {
 
@@ -9,13 +9,12 @@ export default class extends React.Component {
 		super();
 		this.state = {
 			isRunning: false,
+			initialSeconds: 1500,
 			secondsRemaining: 1500
 		};
 
-		this.toggleTimer = this.toggleTimer.bind(this);
 		this.tick = this.tick.bind(this);
-		this.timerDone = this.timerDone.bind(this);
-		this.resetTimer = this.resetTimer.bind(this);
+		this.toggleTimer = this.toggleTimer.bind(this);
 	}
 
 	tick() {
@@ -29,34 +28,36 @@ export default class extends React.Component {
 		if (!this.state.isRunning) {
 			this.timer = setInterval(this.tick, 1000);
 		} else {
-			this.timerDone();
+			clearInterval(this.timer);
 		}
 
 		this.setState({isRunning: !this.state.isRunning});
 	}
 
-	timerDone() {
+	resetTimer(seconds)  {
+		const resetTime = seconds === null ? this.state.initialSeconds : seconds;
 		clearInterval(this.timer);
-	}
-
-	resetTimer() {
-		this.timerDone();
-		this.setState({isRunning: false, secondsRemaining: 1500});
-	}
+		this.setState({isRunning: false, initialSeconds: resetTime, secondsRemaining: resetTime});
+	};
 
 	render() {
 		const buttonClass = this.state.isRunning ? 'danger' : 'success';
 		const buttonText = this.state.isRunning ? 'Stop' : 'Start';
 		return (
 			<div className="container">
-				<div className="jumbotron text-center">
-					<h1>{dateTimeExtension.secondsToString(this.state.secondsRemaining)}</h1>
+				<div className="row">
+					<TimerButton class="danger" text="Pomodoro!" clickEvent={() => this.resetTimer(1500)} offset={3}/>
+					<TimerButton class="primary" text="Short Break" clickEvent={() => this.resetTimer(300)}/>
+					<TimerButton class="primary" text="Long Break" clickEvent={() => this.resetTimer(1200)}/>
+				</div>
+				<div className="row">
+					<TimerText seconds={this.state.secondsRemaining}/>
 				</div>
 				<div className="row">
 					<TimerButton class={buttonClass} text={`${buttonText}`} clickEvent={this.toggleTimer} offset={4}/>
-					<TimerButton class="info" text="Reset" clickEvent={this.resetTimer}/>
+					<TimerButton class="info" text="Reset" clickEvent={() => this.resetTimer()}/>
 				</div>
 			</div>
 		)
-	};
-}
+	}
+};

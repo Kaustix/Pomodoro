@@ -23,4 +23,4 @@ TimerButton.defaultProps = {
 	offset: 0
 };
 
-export {TimerButton};
+export default TimerButton;
