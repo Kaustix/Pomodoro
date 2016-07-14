@@ -1,5 +1,5 @@
 import React from 'react';
-import * as dateTimeExtension from '../Extensions/DateTimeExtension'
+import * as dateTimeExtension from '../../extensions/date-time-extension';
 
 class TimerText extends React.Component {
 	render() {
@@ -12,7 +12,7 @@ class TimerText extends React.Component {
 }
 
 TimerText.propTypes = {
-	initialSeconds: React.PropTypes.number
+	seconds: React.PropTypes.number
 };
 
 export default TimerText;

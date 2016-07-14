@@ -1,17 +1,15 @@
-require('../css/styles.less');
-require('../images/favicon.ico');
+require('../assets/css/styles.less');
+require('../assets/images/favicon.ico');
 
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import Timer from './Timer/Timer';
+import Routes from './routes';
 
 class App extends React.Component {
 	render() {
 		return (
-			<div className="container">
-				<Timer />
-			</div>
+			<Routes/>
 		)
 	}
 }

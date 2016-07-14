@@ -1,9 +1,9 @@
 import React from 'react';
 
-import TimerButton from './TimerButton';
-import TimerText from './TimerText';
+import TimerButton from './timer-button';
+import TimerText from './timer-text';
 
-export default class extends React.Component {
+export default class Timer extends React.Component {
 
 	constructor() {
 		super();
@@ -60,4 +60,4 @@ export default class extends React.Component {
 			</div>
 		)
 	}
-};
+}

@@ -7,7 +7,7 @@ module.exports = {
 		extensions: ['', '.js', '.jsx']
 	},
 	entry: [
-		'./js/App.jsx'
+		'./app/app.jsx'
 	],
 	output: {
 		path: path.join(__dirname, '/public'),
