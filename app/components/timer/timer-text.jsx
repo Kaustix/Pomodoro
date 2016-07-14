@@ -1,18 +1,56 @@
+var PieChart = require('../../../bower_components/jquery.easy-pie-chart/dist/easypiechart');
+
 import React from 'react';
-import * as dateTimeExtension from '../../extensions/date-time-extension';
+
+import * as dateTime from '../../extensions/date-time-extension';
 
 class TimerText extends React.Component {
+	constructor() {
+		super();
+		this.state = { chart : "" };
+		this.formatTime = this.formatTime.bind(this);
+		this.formatPercentage = this.formatPercentage.bind(this);
+	}
+
+	componentDidMount() {
+		this.setState({
+			chart: new PieChart(document.querySelector('.chart'), {
+				barColor: '#389538',
+				trackColor: false,
+				scaleColor: false,
+				lineWidth: 10,
+				lineCap: 'butt',
+				size: 150
+			})
+		});
+	}
+
+	componentDidUpdate() {
+		this.state.chart.update(this.formatPercentage());
+	}
+
+	formatPercentage() {
+		return (this.props.secondsRemaining / this.props.initialSeconds) * 100;
+	}
+
+	formatTime() {
+		return dateTime.secondsToString(this.props.secondsRemaining);
+	}
+
 	render() {
 		return (
 			<div className="text-center">
-				<h1>{dateTimeExtension.secondsToString(this.props.seconds)}</h1>
+				<div className="chart" data-percent={this.formatPercentage()} id="easy-pie-chart">
+					<span className="time-text">{this.formatTime()}</span>
+				</div>
 			</div>
 		)
 	}
 }
 
 TimerText.propTypes = {
-	seconds: React.PropTypes.number
+	initialSeconds: React.PropTypes.number,
+	secondsRemaining: React.PropTypes.number
 };
 
 export default TimerText;

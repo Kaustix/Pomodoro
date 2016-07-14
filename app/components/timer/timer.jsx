@@ -10,7 +10,8 @@ export default class Timer extends React.Component {
 		this.state = {
 			isRunning: false,
 			initialSeconds: 1500,
-			secondsRemaining: 1500
+			secondsRemaining: 1500,
+			animate: true
 		};
 
 		this.tick = this.tick.bind(this);
@@ -20,7 +21,7 @@ export default class Timer extends React.Component {
 	tick() {
 		this.setState({secondsRemaining: this.state.secondsRemaining - 1});
 		if (this.state.secondsRemaining === 0) {
-			this.resetTimer();
+			this.resetTimer(this.state.initialSeconds);
 		}
 	}
 
@@ -35,9 +36,8 @@ export default class Timer extends React.Component {
 	}
 
 	resetTimer(seconds)  {
-		const resetTime = seconds === null ? this.state.initialSeconds : seconds;
 		clearInterval(this.timer);
-		this.setState({isRunning: false, initialSeconds: resetTime, secondsRemaining: resetTime});
+		this.setState({isRunning: false, initialSeconds: seconds, secondsRemaining: seconds});
 	};
 
 	render() {
@@ -51,11 +51,11 @@ export default class Timer extends React.Component {
 					<TimerButton class="primary" text="Long Break" clickEvent={() => this.resetTimer(1200)}/>
 				</div>
 				<div className="row">
-					<TimerText seconds={this.state.secondsRemaining}/>
+					<TimerText initialSeconds={this.state.initialSeconds} secondsRemaining={this.state.secondsRemaining}/>
 				</div>
 				<div className="row">
 					<TimerButton class={buttonClass} text={`${buttonText}`} clickEvent={this.toggleTimer} offset={4}/>
-					<TimerButton class="info" text="Reset" clickEvent={() => this.resetTimer()}/>
+					<TimerButton class="info" text="Reset" clickEvent={() => this.resetTimer(this.state.initialSeconds)}/>
 				</div>
 			</div>
 		)
