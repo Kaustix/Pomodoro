@@ -10,7 +10,7 @@ FROM resin/raspberrypi-node:slim
 #    alsa-utils libasound2-dev && \
 #    apt-get clean && rm -rf /var/lib/apt/lists/*
 
-RUN apt-get update && apt-get install git-all \
+RUN apt-get install git-all \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # Defines our working directory in container
@@ -24,7 +24,11 @@ COPY . ./
 
 # This install npm dependencies on the resin.io build server,
 # making sure to clean up the artifacts it creates in order to reduce the image size.
-RUN JOBS=MAX npm install --production --unsafe-perm && npm postinstall && npm cache clean && rm -rf /tmp/*
+RUN JOBS=MAX npm install --production --unsafe-perm && npm cache clean && rm -rf /tmp/*
+
+RUN bower --allow-root install
+RUN NODE_ENV=production
+RUN webpack --config ./webpack.prod.config.js --progress --colors
 
 # Enable systemd init system in container
 ENV INITSYSTEM=on
