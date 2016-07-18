@@ -10,6 +10,9 @@ FROM resin/raspberrypi-node:slim
 #    alsa-utils libasound2-dev && \
 #    apt-get clean && rm -rf /var/lib/apt/lists/*
 
+RUN apt-get update && apt-get install git-all \
+    && apt-get clean && rm -rf /var/lib/apt/lists/*
+
 # Defines our working directory in container
 WORKDIR /usr/src/app
 
