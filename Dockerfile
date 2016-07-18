@@ -24,7 +24,7 @@ COPY . ./
 
 # This install npm dependencies on the resin.io build server,
 # making sure to clean up the artifacts it creates in order to reduce the image size.
-RUN JOBS=MAX npm install --production --unsafe-perm && npm cache clean && rm -rf /tmp/* && npm postinstall
+RUN JOBS=MAX npm install --production --unsafe-perm && npm postinstall && npm cache clean && rm -rf /tmp/*
 
 # Enable systemd init system in container
 ENV INITSYSTEM=on
