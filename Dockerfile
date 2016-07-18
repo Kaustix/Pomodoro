@@ -26,6 +26,10 @@ COPY . ./
 # making sure to clean up the artifacts it creates in order to reduce the image size.
 RUN JOBS=MAX npm install --production --unsafe-perm && npm cache clean && rm -rf /tmp/*
 
+RUN bower --allow-root install
+RUN NODE_ENV=production
+RUN webpack --config ./webpack.prod.config.js --progress --colors
+
 # Enable systemd init system in container
 ENV INITSYSTEM=on
 
