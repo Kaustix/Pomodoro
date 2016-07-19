@@ -31,4 +31,4 @@ RUN JOBS=MAX npm install --production --unsafe-perm && npm cache clean && rm -rf
 ENV INITSYSTEM=on
 
 # server.js will run when container starts up on the device
-CMD npm run startprod
+CMD ["npm", "startprod"]
