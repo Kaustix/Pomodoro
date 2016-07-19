@@ -8,8 +8,8 @@
     "build": "webpack --progress --colors",
     "watch": "webpack --progress --colors --watch",
     "start": "node server.js",
-    "startprod": "NODE_ENV=production node server.js",
-    "compile": "bower --allow-root install && webpack --config ./webpack.prod.config.js --progress --colors"
+    "startprod": "npm run postinstall && NODE_ENV=production node server.js",
+    "postinstall": "bower --allow-root install && NODE_ENV=production &&webpack --config ./webpack.prod.config.js --progress --colors"
   },
   "author": "Kiernan Lamarche",
   "license": "MIT",
