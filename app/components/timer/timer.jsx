@@ -1,63 +1,38 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
+import classNames from 'classnames';
 
-import TimerButton from './timer-button';
-import TimerText from './timer-text';
+import TimerButton from './timerButton';
+import TimerChart from './timerChart';
 
-export default class Timer extends React.Component {
+const Timer  = ({initialTime, timeRemaining, isRunning, toggleTimer, setTimer, resetTimer}) => {
+	const buttonStyleName = classNames({'danger': isRunning, 'success': !isRunning});
+	const buttonText = isRunning ? 'Stop' : 'Start';
 
-	constructor() {
-		super();
-		this.state = {
-			isRunning: false,
-			initialSeconds: 1500,
-			secondsRemaining: 1500,
-			animate: true
-		};
-
-		this.tick = this.tick.bind(this);
-		this.toggleTimer = this.toggleTimer.bind(this);
-	}
-
-	tick() {
-		this.setState({secondsRemaining: this.state.secondsRemaining - 1});
-		if (this.state.secondsRemaining === 0) {
-			this.resetTimer(this.state.initialSeconds);
-		}
-	}
-
-	toggleTimer() {
-		if (!this.state.isRunning) {
-			this.timer = setInterval(this.tick, 1000);
-		} else {
-			clearInterval(this.timer);
-		}
-
-		this.setState({isRunning: !this.state.isRunning});
-	}
-
-	resetTimer(seconds)  {
-		clearInterval(this.timer);
-		this.setState({isRunning: false, initialSeconds: seconds, secondsRemaining: seconds});
-	};
-
-	render() {
-		const buttonClass = this.state.isRunning ? 'danger' : 'success';
-		const buttonText = this.state.isRunning ? 'Stop' : 'Start';
-		return (
-			<div className="container">
-				<div className="row">
-					<TimerButton class="danger" text="Pomodoro!" clickEvent={() => this.resetTimer(1500)} offset={3}/>
-					<TimerButton class="primary" text="Short Break" clickEvent={() => this.resetTimer(300)}/>
-					<TimerButton class="primary" text="Long Break" clickEvent={() => this.resetTimer(1200)}/>
-				</div>
-				<div className="row">
-					<TimerText initialSeconds={this.state.initialSeconds} secondsRemaining={this.state.secondsRemaining}/>
-				</div>
-				<div className="row">
-					<TimerButton class={buttonClass} text={`${buttonText}`} clickEvent={this.toggleTimer} offset={4}/>
-					<TimerButton class="info" text="Reset" clickEvent={() => this.resetTimer(this.state.initialSeconds)}/>
-				</div>
+	return (
+		<div className="container">
+			<div className="row">
+				<TimerButton style="danger" text="Pomodoro!" onClick={() => setTimer(1500)} offset={3}/>
+				<TimerButton style="primary" text="Short Break" onClick={() => setTimer(300)}/>
+				<TimerButton style="primary" text="Long Break" onClick={() => setTimer(1200)}/>
 			</div>
-		)
-	}
-}
+			<div className="row">
+				<TimerChart initialTime={initialTime} timeRemaining={timeRemaining}/>
+			</div>
+			<div className="row">
+				<TimerButton style={buttonStyleName} text={`${buttonText}`} onClick={() => toggleTimer} offset={4}/>
+				<TimerButton style="info" text="Reset" onClick={() => resetTimer()}/>
+			</div>
+		</div>
+	)
+};
+
+Timer.propTypes = {
+	initialTime: PropTypes.number.isRequired,
+	timeRemaining: PropTypes.number.isRequired,
+	isRunning: PropTypes.bool.isRequired,
+	toggleTimer: PropTypes.func.isRequired,
+	setTimer: PropTypes.func.isRequired,
+	resetTimer: PropTypes.func.isRequired
+};
+
+export default Timer;

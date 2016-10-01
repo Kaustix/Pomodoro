@@ -1,4 +1,4 @@
-export function secondsToString(seconds) {
+export function ToString(seconds) {
 	var d = Number(seconds);
 	var h = Math.floor(d / 3600);
 	var m = Math.floor(d % 3600 / 60);
