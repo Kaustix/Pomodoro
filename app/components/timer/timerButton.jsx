@@ -1,7 +1,7 @@
 import React, {PropTypes} from 'react';
 
 const TimerButton = ({style, text, onClick, offset}) => (
-	<div className={`col-sm-2 col-sm-offset-${offset}`}>
+	<div className={`col-sm-3 col-sm-offset-${offset}`}>
 		<button type="button"
 				className={`btn btn-${style} btn-block`}
 				onClick={onClick}>{text}</button>

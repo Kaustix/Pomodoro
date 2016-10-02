@@ -4,13 +4,21 @@ require('../assets/images/favicon.ico');
 import React from 'react';
 import ReactDOM from 'react-dom';
 import {Provider} from 'react-redux';
-import {compose, createStore} from 'redux';
+import {compose, createStore, applyMiddleware} from 'redux';
+import createSagaMiddleware from 'redux-saga';
 
 import Routes from './routes';
-import Reducers from './reducers';
+import Reducers from './components/reducers';
+import Sagas from './components/sagas';
 
-const createStoreDevTools = compose(window.devToolsExtension ? window.devToolsExtension() : f => f)(createStore);
-const store = createStoreDevTools(Reducers);
+const sagaMiddleware = createSagaMiddleware();
+const store = createStore(Reducers, compose(
+	applyMiddleware(sagaMiddleware),
+	window.devToolsExtension ? window.devToolsExtension() : f => f
+));
+
+sagaMiddleware.run(Sagas);
+
 
 class App extends React.Component {
 	render() {
