@@ -2,10 +2,7 @@ const webpack = require('webpack');
 const path = require('path');
 
 module.exports = {
-	context: __dirname,
-	devtool: 'eval',
 	entry: [
-		'webpack-hot-middleware/client',
 		'babel-polyfill',
 		'./app/app.jsx'
 	],
@@ -17,16 +14,21 @@ module.exports = {
 	resolve: {
 		extensions: ['', '.js', '.jsx']
 	},
-	plugins: [
-		new webpack.HotModuleReplacementPlugin(),
-		new webpack.NoErrorsPlugin()
-	],
+	externals: {
+		'cheerio': 'window',
+		'react/addons': true,
+		'react/lib/ExecutionEnvironment': true,
+		'react/lib/ReactContext': true
+	},
 	module: {
 		loaders: [
 			{
 				test: /\.jsx?$/,
 				exclude: /(node_modules|bower_components)/,
-				loaders: ['react-hot', 'babel?presets[]=es2015,presets[]=react,presets[]=stage-2']
+				loader: 'babel',
+				query: {
+					presets: ['es2015', 'react', 'stage-2', 'react-hmre']
+				}
 			},
 			{
 				test: /\.less$/,

@@ -12,13 +12,19 @@ import Reducers from './components/reducers';
 import Sagas from './components/sagas';
 
 const sagaMiddleware = createSagaMiddleware();
-const store = createStore(Reducers, compose(
+const storeMiddleware = compose(
 	applyMiddleware(sagaMiddleware),
 	window.devToolsExtension ? window.devToolsExtension() : f => f
-));
-
+);
+const store = createStore(Reducers, storeMiddleware);
 sagaMiddleware.run(Sagas);
 
+//todo: get hot module to work with redux
+if (module.hot) {
+	module.hot.accept('./components/reducers', () => {
+		store.replaceReducer(require('./components/reducers'))
+	});
+}
 
 class App extends React.Component {
 	render() {
