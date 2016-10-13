@@ -1,13 +1,13 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import * as actions from './timerRedux';
-import TimerPresenter from './timerPresenter';
+import * as Actions from './timerActions';
+import TimerPresenter from './timer';
 
 const mapDispatchToProps = (dispatch) => ({
-	set: (time) => {dispatch(actions.set(time))},
-	start: () => {dispatch(actions.start())},
-	stop: () => {dispatch(actions.stop())},
-	reset: () => {dispatch(actions.reset())}
+	set: (time) => {dispatch(Actions.set(time))},
+	start: () => {dispatch(Actions.start())},
+	stop: () => {dispatch(Actions.stop())},
+	reset: () => {dispatch(Actions.reset())}
 });
 
 const mapStateToProps = (state) => ({
