@@ -7,7 +7,6 @@ export const isRunningSelector = state => state.Timer.isRunning;
 export function* timerRunner() {
 	var isRunning = true;
 	while (isRunning) {
-		console.log(isRunning);
 		const {stopped} = yield race({
 			stopped: take(Actions.STOP),
 			timeout: call(delay, 1000)
@@ -18,7 +17,6 @@ export function* timerRunner() {
 		} else {
 			isRunning = yield select(isRunningSelector);
 			yield put(Actions.tick());
-			console.log(isRunning);
 		}
 	}
 }
