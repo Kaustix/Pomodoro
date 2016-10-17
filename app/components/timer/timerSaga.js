@@ -1,23 +1,28 @@
-import {actionChannel, take, put, call, race, select} from 'redux-saga/effects'
-import {delay} from 'redux-saga';
+import {take, put, call, race, select} from 'redux-saga/effects';
+import {takeEvery, delay} from 'redux-saga';
 import * as Actions from './timerActions';
 
-export function* timerSaga() {
-	const channel = yield actionChannel(Actions.START);
-	while (yield take(channel)) {
-		let isRunning = true;
-		while (isRunning) {
-			const {stopped, finished} = yield race({
-				stopped: take(Actions.STOP),
-				timeout: call(delay, 1000)
-			});
+export const isRunningSelector = state => state.Timer.isRunning;
 
-			if (stopped || finished) {
-				isRunning = false;
-			} else {
-				isRunning = yield select(state => state.Timer.isRunning);
-				yield put(Actions.tick());
-			}
+export function* timerRunner() {
+	var isRunning = true;
+	while (isRunning) {
+		console.log(isRunning);
+		const {stopped} = yield race({
+			stopped: take(Actions.STOP),
+			timeout: call(delay, 1000)
+		});
+
+		if (stopped) {
+			isRunning = false;
+		} else {
+			isRunning = yield select(isRunningSelector);
+			yield put(Actions.tick());
+			console.log(isRunning);
 		}
 	}
+}
+
+export function* timerSaga() {
+	yield call(takeEvery, Actions.START, timerRunner);
 }

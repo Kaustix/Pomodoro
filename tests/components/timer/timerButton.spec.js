@@ -1,11 +1,11 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import sinon from 'sinon';
-import should from '../../helpers/chai-should';
+import { should } from '../../helpers/chai-should';
 
 import TimerButton from '../../../app/components/timer/timerButton';
 
-describe('Timer Button', () => {
+describe('timer button', () => {
 	it('should render text', () => {
 		const text = "Batman";
 		const buttonWrapper = shallow(<TimerButton style="success" text={text} onClick={() => {}}/>);
@@ -17,5 +17,5 @@ describe('Timer Button', () => {
 		const buttonWrapper = shallow(<TimerButton style="success" text="button" onClick={onButtonClick}/>);
 		buttonWrapper.find('button').simulate('click');
 		onButtonClick.calledOnce.should.equal(true);
-	})
+	});
 });

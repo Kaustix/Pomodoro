@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import * as Actions from './timerActions';
-import TimerPresenter from './timer';
+import Timer from './timer';
 
 const mapDispatchToProps = (dispatch) => ({
 	set: (time) => {dispatch(Actions.set(time))},
@@ -15,5 +15,5 @@ const mapStateToProps = (state) => ({
 	timeRemaining: state.Timer.timeRemaining
 });
 
-const TimerContainer = connect(mapStateToProps, mapDispatchToProps)(TimerPresenter);
+const TimerContainer = connect(mapStateToProps, mapDispatchToProps)(Timer);
 export default TimerContainer;
