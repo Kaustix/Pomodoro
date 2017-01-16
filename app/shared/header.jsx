@@ -10,6 +10,7 @@ const Header = () =>
 						<Link to="/" className="navbar-brand">Pomodoro Timer</Link>
 					</div>
 					<ul className="nav navbar-nav">
+						<li><Link to="/homepage">Home Page</Link></li>
 						<li><Link to="/about-pomodoro">What is it?</Link></li>
 					</ul>
 				</div>

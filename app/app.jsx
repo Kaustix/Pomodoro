@@ -11,26 +11,30 @@ import Routes from './routes';
 import Reducers from './components/reducers';
 import Sagas from './components/sagas';
 
+
+// create the middleware with the userManager
+import createOidcMiddleware from 'redux-oidc';
+import userManager from './utils/userManager';
+const oidcMiddleware = createOidcMiddleware(userManager);
+
+import {OidcProvider} from 'redux-oidc';
+
 const sagaMiddleware = createSagaMiddleware();
 const storeMiddleware = compose(
-	applyMiddleware(sagaMiddleware),
+	applyMiddleware(oidcMiddleware, sagaMiddleware),
 	window.devToolsExtension ? window.devToolsExtension() : f => f
 );
+
 const store = createStore(Reducers, storeMiddleware);
 sagaMiddleware.run(Sagas);
-
-//todo: get hot module to work with redux
-if (module.hot) {
-	module.hot.accept('./components/reducers', () => {
-		store.replaceReducer(require('./components/reducers'))
-	});
-}
 
 class App extends React.Component {
 	render() {
 		return (
 			<Provider store={store}>
-				<Routes/>
+				<OidcProvider store={store} userManager={userManager}>
+					<Routes/>
+				</OidcProvider>
 			</Provider>
 		)
 	}

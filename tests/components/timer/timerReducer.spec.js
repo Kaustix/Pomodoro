@@ -1,4 +1,4 @@
-import should from '../../helpers/chai-should';
+import '../../helpers/chai-should';
 
 import TimerState from '../../factories/timerStateFactory';
 

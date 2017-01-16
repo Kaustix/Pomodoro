@@ -1,4 +1,3 @@
-const webpack = require('webpack');
 const path = require('path');
 
 module.exports = {
@@ -19,6 +18,9 @@ module.exports = {
 		'react/addons': true,
 		'react/lib/ExecutionEnvironment': true,
 		'react/lib/ReactContext': true
+	},
+	devServer: {
+		historyApiFallback: true
 	},
 	module: {
 		loaders: [

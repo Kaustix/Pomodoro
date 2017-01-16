@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import sinon from 'sinon';
-import { should } from '../../helpers/chai-should';
+import '../../helpers/chai-should';
 
 import Timer from '../../../app/components/timer/timer';
 

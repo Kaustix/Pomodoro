@@ -1,4 +1,4 @@
-import should from '../../helpers/chai-should';
+import '../../helpers/chai-should';
 
 import {put, call, take, race, select} from 'redux-saga/effects';
 import {takeEvery, delay} from 'redux-saga';
