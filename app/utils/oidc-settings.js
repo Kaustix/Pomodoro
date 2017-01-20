@@ -1,6 +1,4 @@
-import { UserManager } from 'oidc-client';
-
-const userManagerConfig = {
+export default {
 	authority: 'http://localhost:5000',
 	client_id: 'jsClient',
 	response_type: 'token id_token',
@@ -11,6 +9,3 @@ const userManagerConfig = {
 	filterProtocolClaims: true,
 	loadUserInfo: true,
 };
-
-const userManager =  new UserManager(userManagerConfig);
-export default userManager;

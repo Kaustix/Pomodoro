@@ -6,8 +6,8 @@ import Layout from './shared/layout';
 import TimerContainer from './components/timer/timerContainer';
 import AboutPomodoro from './components/about/aboutPomodoro';
 
-import home from './components/authentication/home';
-import callback from './components/authentication/callback';
+import home from './components/authentication/components/home';
+import callback from './components/authentication/components/callback';
 
 const Routes = () => (
 	<Router history={browserHistory}>

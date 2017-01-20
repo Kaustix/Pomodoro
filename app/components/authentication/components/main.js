@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import userManager from '../../utils/userManager';
+import userManager from '../../../utils/user-manager';
 
 class MainPage extends React.Component {
 
@@ -31,7 +31,7 @@ class MainPage extends React.Component {
 
 function mapStateToProps(state) {
 	return {
-		user: state.oidc.user,
+		user: state.User.user,
 	};
 }
 

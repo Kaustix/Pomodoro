@@ -10,8 +10,9 @@ class HomePage extends React.Component {
 }
 
 function mapStateToProps(state) {
+	console.log(state.User.user);
 	return {
-		user: state.oidc.user
+		user: state.User.user
 	};
 }
 
